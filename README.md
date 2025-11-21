@@ -1,2 +1,2 @@
 # LuoguAutoPunch
-To help you punch automatically in luogu
+To help you punch automatically in luogu.

@@ -3,12 +3,12 @@ import os
 import sys
 
 try:
-    # 尝试导入 dotenv (只有本地安装了，云端没安装)
     from dotenv import load_dotenv
-    load_dotenv() # 加载 .env 文件
-    print("✅ 本地调试模式：已加载 .env 文件")
+    if load_dotenv(): # 只有真的找到了文件并加载成功，才打印
+        print("✅ 本地调试模式：已加载 .env 文件")
+    else:
+        print("⚙️ 云端/无文件模式：将使用系统环境变量 (Secrets)")
 except ImportError:
-    # 如果导入失败（说明在云端），直接跳过，不报错
     pass
 
 # -----------------------------------------------------------------------------
@@ -112,3 +112,4 @@ def luogu_punch():
 
 if __name__ == "__main__":
     luogu_punch()
+

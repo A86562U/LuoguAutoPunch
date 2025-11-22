@@ -2,6 +2,7 @@ import os
 import time
 import requests
 from playwright.sync_api import sync_playwright
+from datetime import datetime
 
 try:
     from dotenv import load_dotenv
@@ -18,6 +19,8 @@ except ImportError:
 def send_notification(title, content):
     token = os.getenv("PUSHPLUS_TOKEN")
     if not token: return
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    content += f"<br><br>------------<br>推送时间: {current_time}"
     try:
         requests.post("http://www.pushplus.plus/send", json={
             "token": token, "title": title, "content": content, "template": "html"
@@ -187,3 +190,4 @@ class JuejinBrowser:
 
 if __name__ == "__main__":
     JuejinBrowser().run()
+
